@@ -2,6 +2,7 @@
 using EfCorePracticeApiNet10.Data;
 using EfCorePracticeApiNet10.DTOs;
 using EfCorePracticeApiNet10.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,7 @@ namespace EfCorePracticeApiNet10.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
