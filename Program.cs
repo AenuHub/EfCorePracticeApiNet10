@@ -1,5 +1,6 @@
 using EfCorePracticeApiNet10.Data;
 using EfCorePracticeApiNet10.Services;
+using EfCorePracticeApiNet10.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Scalar.AspNetCore;
@@ -43,6 +44,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
