@@ -7,6 +7,7 @@ using Scalar.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using EfCorePracticeApiNet10.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
@@ -29,11 +30,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<LoggingActionFilter>();
+});
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source = products.db"));
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddSingleton<PasswordService>();
 builder.Services.AddSingleton<JwtService>();
+
 
 var app = builder.Build();
 
