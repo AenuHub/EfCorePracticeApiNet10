@@ -33,6 +33,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<LoggingActionFilter>();
+    options.Filters.Add<ValidationActionFilter>();
 });
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source = products.db"));
