@@ -10,6 +10,8 @@ using System.Text;
 using EfCorePracticeApiNet10.Filters;
 using EfCorePracticeApiNet10.Services.Interfaces;
 using EfCorePracticeApiNet10.Services.Implementations;
+using EfCorePracticeApiNet10.Repositories.Interfaces;
+using EfCorePracticeApiNet10.Repositories.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
@@ -43,7 +45,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddSingleton<PasswordService>();
 builder.Services.AddSingleton<JwtService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
